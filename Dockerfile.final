@@ -1,0 +1,13 @@
+FROM golang:1.8.3-alpine3.6
+
+# Add the source code
+ADD src /go/src
+
+# Build the app
+RUN go install app
+
+# Run the unit tests
+RUN go test app
+
+# Start the app on container start
+CMD app
