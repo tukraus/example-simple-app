@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh "docker build -t campbel/example-simple-app ."
+            }
+        }
+        stage('Test') {
+            steps  {
+                sh "docker run -i --rm campbel/example-simple-app go test app"
+            }
+        }
+        stage('Push') {
+            steps {
+                sh "docker push campbel/example-simple-app"
+            }
+        }
+    }
+}
